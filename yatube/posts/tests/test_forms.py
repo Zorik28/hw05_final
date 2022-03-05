@@ -22,6 +22,9 @@ class PostCreateFormTests(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
+        # Для тестирования загрузки изображений
+        # берём байт-последовательность картинки,
+        # состоящей из двух пикселей: белого и чёрного
         cls.small_gif = (
             b'\x47\x49\x46\x38\x39\x61\x02\x00'
             b'\x01\x00\x80\x00\x00\x00\x00\x00'
@@ -64,6 +67,7 @@ class PostCreateFormTests(TestCase):
             'group': self.group.id,
             'image': self.uploaded
         }
+        # Отправляем POST-запрос
         response = self.authorized_client.post(
             reverse('posts:post_create'),
             data=form_data,

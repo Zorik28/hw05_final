@@ -11,9 +11,13 @@ from django.urls import reverse
 from posts.models import Follow, Group, Post
 
 User = get_user_model()
+# Создаем временную папку для медиа-файлов;
+# на момент теста медиа папка будет переопределена
 TEMP_MEDIA_ROOT = tempfile.mkdtemp(dir=settings.BASE_DIR)
 
 
+# Для сохранения media-файлов в тестах будет использоваться
+# временная папка TEMP_MEDIA_ROOT, а потом мы ее удалим
 @override_settings(MEDIA_ROOT=TEMP_MEDIA_ROOT)
 class PostViewTest(TestCase):
     @classmethod
@@ -58,7 +62,7 @@ class PostViewTest(TestCase):
         self.authorized_client.force_login(self.author)
 
     def test_posts_views_use_correct_templates(self):
-        """URL-адрес использует соответствующий шаблон."""
+        """namespase posts использует соответствующий шаблон."""
         templates_url_names = {
             'posts/index.html': reverse('posts:index'),
             'posts/group_list.html': reverse(
@@ -74,8 +78,8 @@ class PostViewTest(TestCase):
                 response = self.authorized_client.get(reverse_name)
                 self.assertTemplateUsed(response, template)
 
-    def test_post_edit_view_use_correct_template(self):
-        """URL-адрес /edit/ использует шаблон posts/create_post.html."""
+    def test_post_view_edit_use_correct_template(self):
+        """namespase post:edit использует шаблон posts/create_post.html."""
         response = self.authorized_client.get(
             reverse('posts:edit', kwargs={'post_id': self.post.id}))
         self.assertTemplateUsed(response, 'posts/create_post.html')
@@ -84,8 +88,8 @@ class PostViewTest(TestCase):
         """Шаблон index сформирован с правильным контекстом."""
         response = self.authorized_client.get(reverse('posts:index'))
         post = response.context['page_obj'][0]
-        self.assertEqual(post, PostViewTest.post)
-        self.assertEqual(post.group, PostViewTest.group)
+        self.assertEqual(post, self.post)
+        self.assertEqual(post.group, self.group)
         self.assertTrue(post.image)
 
     def test_group_list_show_correct_context(self):
@@ -146,12 +150,14 @@ class PostViewTest(TestCase):
         self.assertTrue(response.context['is_edit'])
 
     def test_index_page_cache(self):
+        """Проверка работы кеша главной страницы"""
         response = self.client.get(reverse('posts:index'))
         Post.objects.create(text='test', author=self.author)
         response_filled = self.client.get(reverse('posts:index'))
         self.assertEqual(response.content, response_filled.content)
 
     def test_author_follow_unfollow(self):
+        """Тестирование функций подписок на авторов"""
         # Subscribe to the author
         self.follower_clint.get(reverse(
             'posts:profile_follow', args=[self.author])

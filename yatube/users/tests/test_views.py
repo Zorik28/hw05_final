@@ -11,8 +11,10 @@ class UserViewTest(TestCase):
     def setUpClass(cls) -> None:
         super().setUpClass()
         cls.user = User.objects.create_user(username='test-user')
-        cls.authorized_client = Client()
-        cls.authorized_client.force_login(cls.user)
+
+    def setUp(self) -> None:
+        self.authorized_client = Client()
+        self.authorized_client.force_login(self.user)
 
     def test_users_views_use_correct_templates(self):
         """namespase users использует соответствующий шаблон."""

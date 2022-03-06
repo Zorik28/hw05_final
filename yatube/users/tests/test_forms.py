@@ -7,8 +7,7 @@ User = get_user_model()
 
 class UserCreateFormTest(TestCase):
     @classmethod
-    def setUpClass(cls) -> None:
-        super().setUpClass()
+    def setUp(cls) -> None:
         cls.guest_client = Client()
 
     def test_user_create_form(self):

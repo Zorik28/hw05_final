@@ -34,7 +34,8 @@ def profile(request, username):
     page_obj = get_paginator(posts, request)
     following = False
     if request.user.is_authenticated:
-        following = Follow.objects.filter(user=request.user, author=user)
+        following = Follow.objects.filter(
+            user=request.user, author=user).exists()
     context = {
         'posts': posts,
         'author': user,
@@ -47,7 +48,7 @@ def profile(request, username):
 def post_detail(request, post_id):
     post = get_object_or_404(Post, pk=post_id)
     comments = post.comments.all()
-    form = CommentForm(request.POST or None)
+    form = CommentForm()
     context = {
         'post': post,
         'form': form,

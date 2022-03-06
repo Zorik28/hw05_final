@@ -10,11 +10,7 @@ class UsersURLTest(TestCase):
     @classmethod
     def setUpClass(cls):
         super().setUpClass()
-        cls.guest_client = Client()
         cls.user = User.objects.create(username='test-user')
-        cls.authorized_client = Client()
-        cls.authorized_client.force_login(cls.user)
-
         cls.url_names = [
             '/auth/signup/',
             '/auth/login/',
@@ -26,6 +22,11 @@ class UsersURLTest(TestCase):
             '/auth/reset/done/',
             '/auth/logout/'
         ]
+
+    def setUp(self) -> None:
+        self.guest_client = Client()
+        self.authorized_client = Client()
+        self.authorized_client.force_login(self.user)
 
     def test_users_urls_exist_at_desired_location(self):
         """Страницы /signup/ и /login/ доступны анонимному пользователю"""

@@ -156,7 +156,7 @@ class PostViewTest(TestCase):
         response_filled = self.client.get(reverse('posts:index'))
         self.assertEqual(response.content, response_filled.content)
 
-    def test_author_follow_unfollow(self):
+    def test_author_follow(self):
         """Тестирование функций подписок на авторов"""
         # Subscribe to the author
         self.follower_clint.get(reverse(
@@ -171,10 +171,14 @@ class PostViewTest(TestCase):
         self.assertTrue(
             Follow.objects.get(user=self.follower, author=self.author)
         )
+
+    def test_author_unfollow(self):
+        """Тестирование функций отписки от автора"""
         # Unubscribe from the author
         self.follower_clint.get(reverse(
             'posts:profile_unfollow', args=[self.author])
         )
+        post = Post.objects.create(text='Bla-Bla', author=self.author)
         # Get the favorite authors' posts
         response = self.follower_clint.get(reverse('posts:follow_index'))
         # Tests

@@ -159,9 +159,7 @@ class PostViewTest(TestCase):
     def test_author_follow(self):
         """Тестирование функций подписок на авторов"""
         # Subscribe to the author
-        self.follower_clint.get(reverse(
-            'posts:profile_follow', args=[self.author])
-        )
+        Follow.objects.create(user=self.follower, author=self.author)
         # Author creates the post
         post = Post.objects.create(text='Bla-Bla', author=self.author)
         # Get the favorite authors' posts

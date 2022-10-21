@@ -1,3 +1,34 @@
-# hw05_final
+# Социальная сеть
 
-[![CI](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml/badge.svg?branch=master)](https://github.com/yandex-praktikum/hw05_final/actions/workflows/python-app.yml)
+
+### Описание
+Данный проект представляет собой подобие социальной сети. Здесь есть главная страница, есть страница автора с его постами, а так же страница самого поста с комментариями к нему. Посты можно оставлять в тематических группах. Имеется возможность подписки на того или иного автора. Реализован полный функционал регистрации и восстановления пароля через почту.
+
+
+### Технологии
+- Python 3.9
+- Django 2.2.16
+- Pillow 8.3.1
+- sorl-thumbnail 12.7.0
+
+
+### Запуск проекта на локальном сервере
+- Установите и активируйте виртуальное окружение
+```py -m venv venv```
+```. venv/Scripts/activate```
+
+- Установите зависимости из файла requirements.txt
+```pip install -r requirements.txt```
+
+- Выполните все миграции
+```py manage.py makemigrations```
+```py manage.py migrate```
+
+- В папке с файлом manage.py выполните команду:
+```py manage.py runserver```
+
+
+#### Автор
+Карапетян Зорик
+
+РФ, Санкт-Петербург, Купчино.

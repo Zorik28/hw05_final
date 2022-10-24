@@ -1,34 +1,37 @@
-# Социальная сеть
+# Social network
 
 
-### Описание
-Данный проект представляет собой подобие социальной сети. Здесь есть главная страница, есть страница автора с его постами, а так же страница самого поста с комментариями к нему. Посты можно оставлять в тематических группах. Имеется возможность подписки на того или иного автора. Реализован полный функционал регистрации и восстановления пароля через почту.
+### Description
+This project is like a social network.
+There is a main page, an author's page with his posts, as well as a page of the post with comments to it.
+Posts can be left in thematic groups. It is possible to subscribe to an author.
+The full functionality of registration and password recovery via mail has been implemented.
 
 
-### Технологии
+### Technology stack
 - Python 3.9
 - Django 2.2.16
 - Pillow 8.3.1
 - sorl-thumbnail 12.7.0
 
 
-### Запуск проекта на локальном сервере
-- Установите и активируйте виртуальное окружение
+### Run project on local server
+- Install and activate the virtual environment
 ```py -m venv venv```
 ```. venv/Scripts/activate```
 
-- Установите зависимости из файла requirements.txt
+- Install dependencies from requirements.txt
 ```pip install -r requirements.txt```
 
-- Выполните все миграции
+- Perform all migrations
 ```py manage.py makemigrations```
 ```py manage.py migrate```
 
-- В папке с файлом manage.py выполните команду:
+- In the folder with the manage.py file, run the command:
 ```py manage.py runserver```
 
 
-#### Автор
-Карапетян Зорик
+#### Author
+Karapetyan Zorik
 
-РФ, Санкт-Петербург, Купчино.
+Russian Federation, St. Petersburg, Kupchino.

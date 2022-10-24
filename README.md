@@ -15,19 +15,19 @@ The full functionality of registration and password recovery via mail has been i
 - sorl-thumbnail 12.7.0
 
 
-### Run project on local server
-- Install and activate the virtual environment
+### Project run on local server
+- Install and activate the virtual environment:
 ```py -m venv venv```
 ```. venv/Scripts/activate```
 
-- Install dependencies from requirements.txt
+- Install dependencies from requirements.txt:
 ```pip install -r requirements.txt```
 
-- Perform all migrations
+- Perform all migrations:
 ```py manage.py makemigrations```
 ```py manage.py migrate```
 
-- In the folder with the manage.py file, run the command:
+- Run the command:
 ```py manage.py runserver```
 
 

@@ -1,4 +1,4 @@
-Django==3.2.25
+Django==4.2.16
 django-debug-toolbar==3.2.4
 mixer==7.1.2
 Pillow==10.3.0
